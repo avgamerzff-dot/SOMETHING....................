@@ -1,0 +1,1361 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#08080d">
+<title>For Birthday Girl Only 🌸</title>
+
+<style>
+:root {
+  --ivory: #e8dcc8;
+  --silver: #c9c5d0;
+  --lavender: #d9c3f0;
+  --gold: #d8bd8f;
+  --card: rgba(15,12,20,.88);
+  --border: rgba(217,195,240,.25);
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: #08080d;
+}
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  color: var(--ivory);
+  font-family: Georgia, "Times New Roman", serif;
+}
+button, input { font: inherit; }
+button {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+[hidden] { display: none !important; }
+
+/* BACKGROUND VIDEO */
+#backgroundVideo {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  opacity: 1;
+  filter: brightness(.65) saturate(.85);
+  pointer-events: none;
+  background: #08080d;
+}
+#backgroundOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    rgba(5,5,10,.15),
+    rgba(5,5,10,.48)
+  );
+}
+#stars, #flowers, #confetti {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+#stars { z-index: 2; }
+#flowers { z-index: 3; overflow: hidden; }
+#confetti { z-index: 30; }
+
+/* FALLING FLOWERS */
+.flower {
+  position: absolute;
+  top: -40px;
+  animation: falling linear infinite;
+  user-select: none;
+  text-shadow: 0 0 8px rgba(217,195,240,.3);
+}
+@keyframes falling {
+  0% { transform: translate(0,-5vh) rotate(0); }
+  50% { transform: translate(22px,50vh) rotate(150deg); }
+  100% { transform: translate(-12px,110vh) rotate(320deg); }
+}
+
+/* PAGES */
+.site {
+  position: relative;
+  z-index: 5;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 14px;
+}
+.page {
+  display: none;
+  width: 100%;
+  max-width: 560px;
+  min-width: 0;
+  margin: auto;
+}
+.page.active {
+  display: block;
+  animation: fadeIn .6s ease both;
+}
+.page.entering {
+  display: block;
+  animation: comeFromTop .8s cubic-bezier(.2,.8,.2,1) both;
+}
+.page.leaving {
+  display: block;
+  animation: fallAway .65s ease-in forwards;
+  pointer-events: none;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes comeFromTop {
+  from { opacity: 0; transform: translateY(-100vh); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fallAway {
+  to { opacity: 0; transform: translateY(110vh) rotate(5deg); }
+}
+
+/* CARDS AND TEXT */
+.card {
+  width: 100%;
+  padding: clamp(20px,4vh,32px) clamp(17px,4vw,27px);
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  background: var(--card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 15px 55px rgba(0,0,0,.3);
+  overflow-wrap: anywhere;
+}
+.emblem {
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(217,195,240,.35);
+  background: radial-gradient(circle at 35% 30%,#383044,#15111c);
+  font-size: 40px;
+}
+h1 {
+  color: var(--ivory);
+  font-size: clamp(27px,5vw,40px);
+  line-height: 1.22;
+  margin: 0 0 18px;
+}
+.subtitle {
+  color: var(--silver);
+  font: 16px/1.7 Arial, sans-serif;
+  margin: 0 0 20px;
+}
+label {
+  display: block;
+  text-align: left;
+  color: var(--lavender);
+  font: 600 16px Arial, sans-serif;
+  margin: 0 0 10px 7px;
+}
+.field { margin-bottom: 22px; }
+input {
+  display: block;
+  width: 100%;
+  min-height: 58px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: rgba(225,216,240,.055);
+  color: var(--ivory);
+  outline: none;
+  font: 16px Arial, sans-serif;
+  color-scheme: dark;
+}
+input:focus { border-color: var(--lavender); }
+input::placeholder { color: #91899a; }
+
+.primary, .secondary {
+  min-height: 54px;
+  border-radius: 17px;
+  padding: 12px 17px;
+  font: 600 16px Arial, sans-serif;
+  transition: transform .2s, opacity .2s;
+}
+.primary {
+  color: #17120c;
+  background: linear-gradient(135deg,#e8d3ac,#b89b72);
+  border: 1px solid #e0c9a1;
+}
+.secondary {
+  color: var(--ivory);
+  background: rgba(255,255,255,.045);
+  border: 1px solid var(--border);
+}
+.primary:active, .secondary:active { transform: scale(.98); }
+.full { width: 100%; }
+.message {
+  min-height: 20px;
+  margin: 12px 0 0;
+  color: var(--gold);
+  font: 14px/1.5 Arial, sans-serif;
+}
+.footer {
+  margin-top: 23px;
+  color: #b7a9bb;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* LIGHTS */
+#lightsPage .card {
+  transition: background 2s, box-shadow 2s, border-color 2s;
+}
+#lightsPage.lights-on .card {
+  background: rgba(44,34,42,.91);
+  border-color: rgba(232,220,200,.6);
+  box-shadow: 0 0 70px rgba(224,201,161,.25);
+}
+.room-darkness, .warm-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+.room-darkness {
+  background: #020207;
+  opacity: .68;
+  transition: opacity 2.2s ease;
+}
+.room-darkness.lit { opacity: 0; }
+.warm-glow {
+  opacity: 0;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    rgba(255,220,160,.19),
+    transparent 65%
+  );
+  transition: opacity 2s;
+}
+.warm-glow.lit { opacity: 1; }
+.light-button { width: 100%; margin-top: 10px; }
+
+/* GREETING */
+.birthday-banner {
+  font-size: clamp(34px,8vw,62px);
+  line-height: 1.2;
+  color: var(--ivory);
+  text-shadow: 0 0 22px rgba(224,201,161,.45);
+  animation: greetingPop 1.1s cubic-bezier(.2,1.4,.5,1) both;
+}
+@keyframes greetingPop {
+  0% { opacity: 0; transform: scale(.3) rotate(-8deg); }
+  65% { opacity: 1; transform: scale(1.08) rotate(2deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+.sparkle-line {
+  color: var(--gold);
+  letter-spacing: 9px;
+  animation: sparklePulse 1.4s ease-in-out infinite alternate;
+}
+@keyframes sparklePulse {
+  from { opacity: .45; }
+  to { opacity: 1; }
+}
+
+/* THREE-LAYER CAKE */
+.cake-scene {
+  width: 100%;
+  max-width: 360px;
+  margin: 16px auto 24px;
+  position: relative;
+  padding-top: 52px;
+  min-height: 285px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+.cake {
+  position: relative;
+  width: 100%;
+  height: 218px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  transform-origin: center bottom;
+  animation: cakeAppear 1.2s cubic-bezier(.2,1.2,.5,1) both;
+}
+@keyframes cakeAppear {
+  from { opacity: 0; transform: translateY(100px) scale(.6); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.cake-plate {
+  width: 94%;
+  height: 15px;
+  background: linear-gradient(#eee2f0,#a99ab6);
+  border-radius: 50%;
+  box-shadow: 0 7px 15px rgba(0,0,0,.35);
+  position: relative;
+  z-index: 1;
+}
+.layer {
+  position: relative;
+  border-radius: 12px 12px 8px 8px;
+  border-bottom: 7px solid rgba(90,45,60,.2);
+  box-shadow: inset 0 -5px 0 rgba(100,45,60,.12),
+              0 4px 9px rgba(0,0,0,.16);
+  overflow: hidden;
+}
+.layer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 15px;
+  background: rgba(255,255,255,.55);
+  border-radius: 50%;
+}
+.layer-bottom {
+  width: 88%;
+  height: 69px;
+  background: linear-gradient(90deg,#bd809c,#f0c3d0,#c887a5);
+}
+.layer-middle {
+  width: 72%;
+  height: 59px;
+  background: linear-gradient(90deg,#d6c2ed,#f5e8ff,#c9b0e4);
+  margin-bottom: -2px;
+}
+.layer-top {
+  width: 55%;
+  height: 49px;
+  background: linear-gradient(90deg,#f1d7bb,#fff0d6,#d9b48f);
+  margin-bottom: -2px;
+}
+.icing-drip {
+  position: absolute;
+  top: 10px;
+  left: 12%;
+  width: 12px;
+  height: 22px;
+  background: #fff4e8;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 35px 5px 0 -1px #fff4e8,
+              68px -1px 0 -2px #fff4e8;
+}
+.sprinkle {
+  position: absolute;
+  width: 6px;
+  height: 3px;
+  border-radius: 4px;
+  background: #a88cc5;
+  transform: rotate(30deg);
+  z-index: 2;
+}
+.s1 { left: 22%; top: 27px; }
+.s2 { left: 43%; top: 35px; background:#d7a14c; }
+.s3 { left: 66%; top: 23px; background:#bb769a; }
+.s4 { left: 35%; top: 16px; background:#b6a2d6; }
+.s5 { left: 77%; top: 39px; background:#d7a14c; }
+
+.candle-row {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  z-index: 4;
+}
+.candle {
+  position: relative;
+  width: 9px;
+  height: 43px;
+  border-radius: 4px 4px 2px 2px;
+  background: repeating-linear-gradient(
+    135deg,#fff4e8 0 5px,#c8addf 5px 9px
+  );
+  box-shadow: 0 0 6px rgba(255,255,255,.15);
+}
+.flame {
+  position: absolute;
+  width: 13px;
+  height: 19px;
+  left: -2px;
+  top: -20px;
+  border-radius: 50% 50% 50% 10%;
+  transform: rotate(-45deg);
+  background: radial-gradient(
+    circle at 65% 70%,
+    #fff9c5 0 20%,#ffcb69 40%,#f48b42 70%,transparent 75%
+  );
+  filter: drop-shadow(0 0 7px rgba(255,180,65,.8));
+  transform-origin: center bottom;
+  animation: flicker .55s ease-in-out infinite alternate;
+}
+@keyframes flicker {
+  from { transform: rotate(-45deg) scale(.9); }
+  to { transform: rotate(-40deg) scale(1.08); }
+}
+.candles-out .flame { animation: blowOut .45s ease forwards; }
+@keyframes blowOut {
+  to { opacity: 0; transform: translate(18px,-20px) scale(.1); }
+}
+.cake-cut { animation: cakeSplit 1.1s ease-in-out forwards; }
+@keyframes cakeSplit {
+  0% { transform: translateX(0) rotate(0); }
+  40% { transform: translateX(-8px) rotate(-2deg); }
+  100% { transform: translateX(-22px) rotate(-5deg); }
+}
+.cake-cut .layer {
+  box-shadow: inset 0 -5px 0 rgba(100,45,60,.12),
+              0 4px 9px rgba(0,0,0,.16);
+}
+.knife-button {
+  position: absolute;
+  z-index: 7;
+  right: 2%;
+  bottom: 30px;
+  border: 1px solid rgba(224,201,161,.5);
+  background: rgba(20,16,24,.95);
+  color: var(--ivory);
+  border-radius: 50%;
+  width: 66px;
+  height: 66px;
+  font-size: 34px;
+  box-shadow: 0 0 22px rgba(224,201,161,.15);
+  animation: knifeArrive .8s ease both,
+             knifeWiggle 1.3s ease-in-out infinite alternate;
+}
+@keyframes knifeArrive {
+  from { opacity: 0; transform: translate(70px,-30px) rotate(45deg); }
+  to { opacity: 1; transform: translate(0,0) rotate(0); }
+}
+@keyframes knifeWiggle {
+  from { rotate: -4deg; }
+  to { rotate: 5deg; }
+}
+.cake-instructions {
+  color: var(--ivory);
+  font: 16px/1.6 Arial, sans-serif;
+  margin: 14px 0;
+}
+.countdown {
+  color: var(--gold);
+  font-size: 48px;
+  font-weight: bold;
+  margin: 8px 0 15px;
+  animation: fadeIn .3s ease;
+}
+.blow-button { width: 100%; margin-top: 5px; }
+.knife-button:disabled { opacity: .5; cursor: default; }
+
+/* MEDIA */
+.media {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  max-height: 65vh;
+  margin: 18px auto 0;
+  border-radius: 16px;
+  object-fit: contain;
+  background: #050508;
+}
+
+/* CHOICE BUTTONS */
+.choice-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+}
+.choice {
+  width: 100%;
+  min-height: 54px;
+  text-align: left;
+  padding: 14px;
+  color: var(--ivory);
+  background: rgba(217,195,240,.05);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+.choice span {
+  display: block;
+  color: var(--silver);
+  font: 13px Arial, sans-serif;
+  margin-top: 5px;
+}
+.choice:disabled { opacity: .65; cursor: default; }
+#royalPage .choice {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+}
+#royalPage .choice:active {
+  background: rgba(217,195,240,.15);
+}
+#royalPage .emblem { font-size: 40px; }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .site {
+    align-items: flex-start;
+    padding: 14px 11px 22px;
+  }
+  .card { padding: 23px 17px; border-radius: 24px; }
+  h1 { font-size: clamp(25px,7vw,34px); }
+  .subtitle { font-size: 15px; }
+  .cake-scene {
+    max-width: 320px;
+    transform: scale(.96);
+    transform-origin: top center;
+    margin-bottom: 0;
+  }
+}
+@media (max-width: 900px) and (orientation: landscape) {
+  .site { align-items: flex-start; padding: 10px; }
+  .page { max-width: 620px; }
+  .card { padding: 14px 20px; }
+  .emblem {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    margin-bottom: 9px;
+  }
+  h1 { font-size: 26px; margin-bottom: 10px; }
+  .subtitle { font-size: 13px; line-height: 1.4; margin-bottom: 9px; }
+  .cake-scene {
+    transform: scale(.8);
+    transform-origin: top center;
+    margin-bottom: -50px;
+  }
+}
+@media (min-width: 601px) and (max-height: 800px) {
+  .site { align-items: flex-start; padding: 12px; }
+  .card { padding-top: 16px; padding-bottom: 16px; }
+  .emblem {
+    width: 58px;
+    height: 58px;
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  h1 { font-size: 32px; margin-bottom: 12px; }
+  .subtitle { font-size: 15px; margin-bottom: 12px; }
+  .cake-scene {
+    transform: scale(.86);
+    transform-origin: top center;
+    margin-bottom: -35px;
+  }
+}
+@media (max-height: 520px) {
+  .site { align-items: flex-start; padding: 8px; }
+  .card { padding: 10px 16px; }
+  .emblem {
+    width: 40px;
+    height: 40px;
+    font-size: 21px;
+    margin-bottom: 7px;
+  }
+  h1 { font-size: 23px; margin-bottom: 7px; }
+  .subtitle { font-size: 13px; line-height: 1.35; margin-bottom: 7px; }
+  .cake-scene {
+    transform: scale(.68);
+    transform-origin: top center;
+    margin-bottom: -85px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND VIDEO: loops behind every page -->
+<video id="backgroundVideo" autoplay muted loop playsinline preload="auto">
+  <source src="./background.mp4" type="video/mp4">
+  Your browser does not support background video.
+</video>
+
+<div id="backgroundOverlay"></div>
+<div class="room-darkness" id="roomDarkness"></div>
+<div class="warm-glow" id="warmGlow"></div>
+<canvas id="stars"></canvas>
+<div id="flowers"></div>
+<canvas id="confetti"></canvas>
+
+<main class="site">
+
+  <!-- LOGIN -->
+  <section class="page active" id="verifyPage">
+    <div class="card">
+      <div class="emblem">👀</div>
+      <h1>Who are you? 👀</h1>
+      <p class="subtitle">Hmm... let's see if you're the birthday girl ✨</p>
+
+      <form id="verifyForm">
+        <div class="field">
+          <label for="personName">Name</label>
+          <input id="personName" type="text" placeholder="Enter your name" required>
+        </div>
+        <div class="field">
+          <label for="birthDate">Date of Birth</label>
+          <input id="birthDate" type="date" required>
+        </div>
+        <button class="primary full" type="submit">Enter ✨</button>
+        <p class="message" id="errorMessage" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- TURN ON LIGHTS -->
+  <section class="page" id="lightsPage">
+    <div class="card">
+      <div class="emblem" id="bulbEmblem">🌑</div>
+      <h1>It's a little dark in here...</h1>
+      <p class="subtitle">Birthday girl, would you do the honours? 🥹</p>
+      <button class="primary light-button" id="turnOnLights">
+        💡 Turn on the lights
+      </button>
+    </div>
+  </section>
+
+  <!-- BIRTHDAY GREETING -->
+  <section class="page" id="greetingPage">
+    <div class="card">
+      <div class="sparkle-line">✧ ✦ ✧</div>
+      <h1 class="birthday-banner">HAPPY BIRTHDAY!</h1>
+      <div class="emblem">🧸</div>
+      <p class="subtitle">HEY, IT'S YOUR DAY! 💖</p>
+      <p class="subtitle">Well, well… someone is getting older. 😂</p>
+      <p class="subtitle">
+        I hope you're enjoying all the attention today. Don't get too used to it, though.
+      </p>
+      <p class="subtitle">
+        "Anyway, enough talking. Go ahead and see what's waiting for you."
+      </p>
+      <button class="primary full" id="showCake">
+        Chalo ab click karo 😂
+      </button>
+      <div class="footer">Sibling privileges: temporarily unlocked ☠️</div>
+    </div>
+  </section>
+
+  <!-- CAKE AND CANDLE COUNTDOWN -->
+  <section class="page" id="cakePage">
+    <div class="card">
+      <h1>Make a wish, Swarthi Dodani</h1> 🎂</h1>
+      <p class="subtitle" id="cakeSubtitle">
+        This cake is made especially for you. 💗
+      </p>
+
+      <div class="cake-scene">
+        <div class="cake" id="cake">
+          <div class="candle-row" id="candleRow">
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+          </div>
+
+          <div class="layer layer-top">
+            <div class="icing-drip"></div>
+            <i class="sprinkle s1"></i>
+            <i class="sprinkle s2"></i>
+          </div>
+          <div class="layer layer-middle">
+            <div class="icing-drip"></div>
+            <i class="sprinkle s3"></i>
+            <i class="sprinkle s4"></i>
+          </div>
+          <div class="layer layer-bottom">
+            <div class="icing-drip"></div>
+            <i class="sprinkle s1"></i>
+            <i class="sprinkle s2"></i>
+            <i class="sprinkle s3"></i>
+            <i class="sprinkle s5"></i>
+          </div>
+          <div class="cake-plate"></div>
+        </div>
+
+        <button class="knife-button" id="knifeButton"
+          aria-label="Click to cut the cake" hidden>🔪</button>
+      </div>
+
+      <div id="countdownArea">
+        <p class="cake-instructions">Get ready to blow the candles! 🕯️</p>
+        <div class="countdown" id="countdown">3</div>
+        <button class="primary blow-button" id="blowButton" disabled>
+          Make a wish... ✨
+        </button>
+      </div>
+
+      <div id="cutArea" hidden>
+        <p class="cake-instructions" id="cutInstructions">
+          Now tap the little knife to cut your cake! 🔪
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROYAL INVITATION -->
+  <section class="page" id="royalPage">
+    <div class="card">
+      <div class="emblem">👑</div>
+      <div class="sparkle-line">✧ ♛ ✧</div>
+      <h1>Are you ready for the surprise, Swarthi Ji??</h1>
+      <p class="subtitle">
+        Itna wait karwa diya, ab jaldi se choose kar. 😂
+      </p>
+
+      <div class="choice-list">
+        <button class="choice" data-royal="hehe">
+          Haan haan, dikha ab! 👀
+        </button>
+        <button class="choice" data-royal="no">
+          Kuch bakwaas toh nahi hai na? ☠️
+        </button>
+        <button class="choice" data-royal="obviously">
+          Obviously! Itna wait karwaya hai. 🙄
+        </button>
+      </div>
+
+      <p class="message" id="royalMessage" role="status"></p>
+    </div>
+  </section>
+
+  <!-- SEPARATE MEME VIDEO PAGE -->
+  <section class="page" id="memePage">
+    <div class="card">
+      <div class="emblem">🙄</div>
+      <h1>EXCUSE ME?! 😭👉👈</h1>
+      <p class="subtitle">
+        You really said NO to your birthday surprise?!!
+        Bestie, I put my last two brain cells into making this for you.
+        PLEASE. 🥹🥹🎀
+      </p>
+
+      <video id="memeVideo" class="media"
+        autoplay muted loop playsinline controls preload="auto">
+        <source src="./meme.mp4" type="video/mp4">
+        Your browser does not support video playback.
+      </video>
+
+      <p class="message" id="memeError" role="status"></p>
+
+      <button class="secondary full" id="memeBack" style="margin-top:18px">
+        Okay okay, show me 😭💗
+      </button>
+    </div>
+  </section>
+
+  <!-- SURPRISE MENU -->
+  <section class="page" id="surpriseMenuPage">
+    <div class="card">
+      <div class="emblem">🎁</div>
+      <h1>Chalo chalo dabbe kholo!</h1>
+      <p class="subtitle">
+        The cake is cut! Now it's time for your little surprises. 💗
+      </p>
+
+      <div class="choice-list">
+        <button class="choice" data-surprise="1">
+          01 — A little something 💌
+          <span>Open your first surprise</span>
+        </button>
+        <button class="choice" data-surprise="2">
+          02 — Just for you 🌙
+          <span>Open your second surprise</span>
+        </button>
+        <button class="choice" data-surprise="3">
+          03 — One more thing ✨
+          <span>Open your final surprise</span>
+        </button>
+      </div>
+
+      <div class="footer">Sibling privileges: temporarily unlocked ☠️</div>
+    </div>
+  </section>
+
+  <!-- SURPRISE VIDEO PAGE -->
+  <section class="page" id="surprisePage">
+    <div class="card">
+      <div class="emblem" id="surpriseEmblem">💌</div>
+      <h1 id="surpriseTitle">Your surprise</h1>
+      <p class="subtitle" id="surpriseText">
+        Something special, just for you.
+      </p>
+
+      <!-- LOOP ADDED: all three surprise videos repeat -->
+      <video id="surpriseVideo" class="media"
+        controls loop playsinline preload="metadata" hidden></video>
+
+      <p class="message" id="videoError" role="status"></p>
+
+      <button class="secondary full" id="surpriseBack" style="margin-top:18px">
+        Back to surprises
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* BACKGROUND VIDEO */
+const backgroundVideo = document.getElementById("backgroundVideo");
+
+function startBackgroundVideo() {
+  backgroundVideo.muted = true;
+  backgroundVideo.loop = true;
+
+  const attempt = backgroundVideo.play();
+  if (attempt && typeof attempt.catch === "function") {
+    attempt.catch(() => {
+      // Browser autoplay restrictions may require user interaction.
+    });
+  }
+}
+
+startBackgroundVideo();
+
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden && backgroundVideo.paused) {
+    startBackgroundVideo();
+  }
+});
+
+document.addEventListener("pointerdown", () => {
+  if (backgroundVideo.paused) startBackgroundVideo();
+});
+
+backgroundVideo.addEventListener("error", () => {
+  console.error(
+    "background.mp4 failed to load. Check the filename, file format and folder."
+  );
+});
+
+/* STARS */
+const starCanvas = document.getElementById("stars");
+const starCtx = starCanvas.getContext("2d");
+let stars = [];
+let sw = 0;
+let sh = 0;
+
+function resizeStars() {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  sw = window.innerWidth;
+  sh = window.innerHeight;
+
+  starCanvas.width = sw * dpr;
+  starCanvas.height = sh * dpr;
+  starCanvas.style.width = sw + "px";
+  starCanvas.style.height = sh + "px";
+  starCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  stars = Array.from({
+    length: Math.min(140, Math.floor(sw / 3))
+  }, () => ({
+    x: Math.random() * sw,
+    y: Math.random() * sh,
+    r: Math.random() * 1.2 + .2,
+    a: Math.random() * .6 + .15,
+    speed: Math.random() * .17 + .025,
+    phase: Math.random() * 6
+  }));
+}
+
+function drawStars(t) {
+  starCtx.clearRect(0, 0, sw, sh);
+
+  for (const s of stars) {
+    starCtx.beginPath();
+    starCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    starCtx.fillStyle =
+      `rgba(238,232,248,${s.a * (.65 + .35 * Math.sin(t*.001+s.phase))})`;
+    starCtx.fill();
+
+    s.y += s.speed;
+    if (s.y > sh + 2) {
+      s.y = -2;
+      s.x = Math.random() * sw;
+    }
+  }
+
+  requestAnimationFrame(drawStars);
+}
+
+resizeStars();
+requestAnimationFrame(drawStars);
+window.addEventListener("resize", resizeStars);
+
+/* FALLING FLOWERS */
+const flowerContainer = document.getElementById("flowers");
+const flowerColors = ["#d9c3f0", "#eee5f8", "#c5b2df", "#e8dcc8"];
+const flowerSymbols = ["✿", "❀", "✾", "✽"];
+
+for (let i = 0; i < 15; i++) {
+  const f = document.createElement("span");
+  f.className = "flower";
+  f.textContent =
+    flowerSymbols[Math.floor(Math.random() * flowerSymbols.length)];
+  f.style.left = Math.random() * 100 + "%";
+  f.style.fontSize = (12 + Math.random() * 14) + "px";
+  f.style.color =
+    flowerColors[Math.floor(Math.random() * flowerColors.length)];
+  f.style.animationDuration = (16 + Math.random() * 17) + "s";
+  f.style.animationDelay = (-Math.random() * 28) + "s";
+  f.style.opacity = (.2 + Math.random() * .35).toFixed(2);
+  flowerContainer.appendChild(f);
+}
+
+/* PAGE SWITCHING */
+let transitioning = false;
+
+function showPage(id, opts = {}) {
+  if (transitioning) return false;
+
+  const current = document.querySelector(".page.active");
+  const next = document.getElementById(id);
+
+  if (!next || current === next) return false;
+
+  transitioning = true;
+
+  if (opts.fall && current) {
+    current.classList.remove("active", "entering");
+    current.classList.add("leaving");
+
+    setTimeout(() => {
+      current.classList.remove("leaving");
+      next.classList.add("active", "entering");
+
+      if (opts.confetti) launchConfetti();
+
+      window.scrollTo({top: 0, behavior: "smooth"});
+
+      setTimeout(() => {
+        next.classList.remove("entering");
+        transitioning = false;
+      }, 820);
+    }, 600);
+  } else {
+    if (current) {
+      current.classList.remove("active", "entering", "leaving");
+    }
+
+    next.classList.add("active");
+
+    if (opts.confetti) launchConfetti();
+
+    transitioning = false;
+    window.scrollTo({top: 0, behavior: "smooth"});
+  }
+
+  return true;
+}
+
+/* LOGIN */
+document.getElementById("verifyForm").addEventListener("submit", e => {
+  e.preventDefault();
+
+  const name = document.getElementById("personName")
+    .value.trim().toLowerCase().replace(/\s+/g, " ");
+  const dob = document.getElementById("birthDate").value;
+  const msg = document.getElementById("errorMessage");
+
+  if (name === "parinita jaiswani" && dob === "2000-11-05") {
+    msg.textContent = "";
+    showPage("lightsPage", {fall: true});
+  } else {
+    msg.textContent =
+      "Hmm... I don't think you're the birthday girl 👀 Try again!";
+  }
+});
+
+/* TURN ON LIGHTS */
+document.getElementById("turnOnLights").addEventListener("click", () => {
+  const darkness = document.getElementById("roomDarkness");
+  const glow = document.getElementById("warmGlow");
+  const lightPage = document.getElementById("lightsPage");
+  const button = document.getElementById("turnOnLights");
+
+  darkness.classList.add("lit");
+  glow.classList.add("lit");
+  lightPage.classList.add("lights-on");
+
+  document.getElementById("bulbEmblem").textContent = "💡";
+  button.textContent = "Look what I have for you... ✨";
+  button.disabled = true;
+
+  startBackgroundVideo();
+
+  setTimeout(() => {
+    showPage("greetingPage", {confetti: true});
+  }, 2300);
+});
+
+/* SHOW CAKE */
+document.getElementById("showCake").addEventListener("click", () => {
+  resetCake();
+
+  if (showPage("cakePage")) {
+    startCountdown();
+  }
+});
+
+let countdownInterval = null;
+let countdownValue = 3;
+let cakeBlown = false;
+let cakeCut = false;
+
+function resetCake() {
+  clearInterval(countdownInterval);
+  countdownInterval = null;
+  countdownValue = 3;
+  cakeBlown = false;
+  cakeCut = false;
+
+  document.getElementById("cake").classList.remove("cake-cut");
+  document.getElementById("candleRow").classList.remove("candles-out");
+
+  document.querySelectorAll(".flame").forEach(flame => {
+    flame.style.opacity = "1";
+  });
+
+  document.getElementById("countdownArea").hidden = false;
+  document.getElementById("cutArea").hidden = true;
+  document.getElementById("countdown").textContent = "3";
+  document.getElementById("cakeSubtitle").textContent =
+    "This cake is made especially for you. 💗";
+
+  document.querySelector("#countdownArea .cake-instructions").textContent =
+    "Get ready to blow the candles! 🕯️";
+
+  const blow = document.getElementById("blowButton");
+  blow.disabled = true;
+  blow.textContent = "Make a wish... ✨";
+
+  const knife = document.getElementById("knifeButton");
+  knife.hidden = true;
+  knife.disabled = false;
+  knife.textContent = "🔪";
+}
+
+function startCountdown() {
+  const number = document.getElementById("countdown");
+  const blow = document.getElementById("blowButton");
+
+  countdownValue = 3;
+  number.textContent = countdownValue;
+  blow.disabled = true;
+  blow.textContent = "Make a wish... ✨";
+
+  countdownInterval = setInterval(() => {
+    countdownValue--;
+
+    if (countdownValue > 0) {
+      number.textContent = countdownValue;
+    } else {
+      clearInterval(countdownInterval);
+      countdownInterval = null;
+      number.textContent = "✨";
+
+      document.querySelector("#countdownArea .cake-instructions").textContent =
+        "Close your eyes, make a wish, and blow! 💨";
+
+      blow.disabled = false;
+      blow.textContent = "💨 Blow the candles!";
+    }
+  }, 1000);
+}
+
+/* BLOW CANDLES */
+document.getElementById("blowButton").addEventListener("click", () => {
+  if (cakeBlown) return;
+  cakeBlown = true;
+
+  const button = document.getElementById("blowButton");
+  button.disabled = true;
+  button.textContent = "Wish made! 💗";
+
+  document.getElementById("candleRow").classList.add("candles-out");
+  document.getElementById("cakeSubtitle").textContent =
+    "Yay! May all your wishes come true. 💗";
+
+  setTimeout(() => {
+    document.getElementById("countdownArea").hidden = true;
+    document.getElementById("cutArea").hidden = false;
+    document.getElementById("knifeButton").hidden = false;
+    launchConfetti();
+  }, 700);
+});
+
+/* CUT CAKE -> ROYAL INVITATION */
+document.getElementById("knifeButton").addEventListener("click", () => {
+  if (cakeCut) return;
+  cakeCut = true;
+
+  const knife = document.getElementById("knifeButton");
+  knife.disabled = true;
+  knife.textContent = "✨";
+
+  document.getElementById("cutInstructions").textContent =
+    "Yayyy! The cake is cut! Happy Birthday! 🎂💗";
+
+  document.getElementById("cake").classList.add("cake-cut");
+  launchConfetti();
+
+  setTimeout(() => {
+    showPage("royalPage", {fall: true, confetti: true});
+    knife.disabled = false;
+  }, 1600);
+});
+
+/* ROYAL INVITATION BUTTONS */
+const royalButtons = document.querySelectorAll("[data-royal]");
+const royalMessage = document.getElementById("royalMessage");
+
+royalButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    if (transitioning) return;
+
+    const choice = button.dataset.royal;
+
+    /* NO -> SEPARATE MEME PAGE */
+    if (choice === "no") {
+      const memeVideo = document.getElementById("memeVideo");
+      const memeError = document.getElementById("memeError");
+
+      memeError.textContent = "";
+
+      if (showPage("memePage", {fall: true, confetti: true})) {
+        memeVideo.loop = true;
+        memeVideo.muted = true;
+        memeVideo.currentTime = 0;
+
+        // Wait until the meme page is visible before attempting playback.
+        setTimeout(() => {
+          const playAttempt = memeVideo.play();
+
+          if (playAttempt && typeof playAttempt.catch === "function") {
+            playAttempt.catch(() => {
+              memeError.textContent =
+                "Tap Play on the video if it doesn't start automatically.";
+            });
+          }
+        }, 1500);
+      }
+
+      return;
+    }
+
+    /* THE OTHER TWO ANSWERS -> SURPRISE MENU */
+    if (choice === "hehe") {
+      royalMessage.textContent =
+        "Hehe, someone is excited! Your surprises await, Your Highness. 🎀";
+    } else if (choice === "obviously") {
+      royalMessage.textContent =
+        "That's the birthday queen I know! Let the magic begin. 🥹💗";
+    }
+
+    royalButtons.forEach(b => b.disabled = true);
+    launchConfetti();
+
+    setTimeout(() => {
+      const moved = showPage("surpriseMenuPage", {
+        fall: true,
+        confetti: true
+      });
+
+      if (!moved) {
+        royalButtons.forEach(b => b.disabled = false);
+      } else {
+        setTimeout(() => {
+          royalButtons.forEach(b => b.disabled = false);
+        }, 1500);
+      }
+    }, 900);
+  });
+});
+
+/* MEME VIDEO -> BACK TO ROYAL INVITATION */
+const memeVideo = document.getElementById("memeVideo");
+
+document.getElementById("memeBack").addEventListener("click", () => {
+  memeVideo.pause();
+  memeVideo.currentTime = 0;
+
+  showPage("royalPage", {fall: true});
+});
+
+memeVideo.addEventListener("error", () => {
+  document.getElementById("memeError").textContent =
+    "The meme video could not load. Check that meme.mp4 is beside index.html.";
+});
+
+/* SURPRISE VIDEOS */
+const surpriseVideo = document.getElementById("surpriseVideo");
+const videoError = document.getElementById("videoError");
+
+/* Make sure the surprise player loops */
+surpriseVideo.loop = true;
+
+const surpriseData = {
+  1: {
+    title: "Surprise No. 1 💌",
+    text: "A little something just for you.",
+    src: "./surprise1.mp4",
+    emblem: "💌"
+  },
+  2: {
+    title: "Surprise No. 2 🌙",
+    text: "A little memory for the birthday girl.",
+    src: "./surprise2.mp4",
+    emblem: "🌙"
+  },
+  3: {
+    title: "Surprise No. 3 ✨",
+    text: "Save the best for last!",
+    src: "./surprise3.mp4",
+    emblem: "✨"
+  }
+};
+
+document.querySelectorAll("[data-surprise]").forEach(button => {
+  button.addEventListener("click", () => {
+    const data = surpriseData[button.dataset.surprise];
+
+    surpriseVideo.pause();
+    surpriseVideo.loop = true;
+    surpriseVideo.removeAttribute("src");
+    surpriseVideo.replaceChildren();
+
+    videoError.textContent = "";
+    document.getElementById("surpriseTitle").textContent = data.title;
+    document.getElementById("surpriseText").textContent = data.text;
+    document.getElementById("surpriseEmblem").textContent = data.emblem;
+
+    const source = document.createElement("source");
+    source.src = data.src;
+    source.type = "video/mp4";
+
+    surpriseVideo.appendChild(source);
+    surpriseVideo.hidden = false;
+    surpriseVideo.load();
+
+    if (showPage("surprisePage", {confetti: true})) {
+      setTimeout(() => {
+        surpriseVideo.play().catch(() => {
+          // Visitor can tap Play if autoplay is blocked.
+        });
+      }, 100);
+    }
+  });
+});
+
+surpriseVideo.addEventListener("error", () => {
+  videoError.textContent =
+    "This video could not load. Check the filename and make sure the MP4 is in the project folder.";
+});
+
+/* BACK TO SURPRISE MENU */
+document.getElementById("surpriseBack").addEventListener("click", () => {
+  surpriseVideo.pause();
+  surpriseVideo.removeAttribute("src");
+  surpriseVideo.replaceChildren();
+  surpriseVideo.hidden = true;
+
+  showPage("surpriseMenuPage");
+});
+
+/* CONFETTI */
+const confettiCanvas = document.getElementById("confetti");
+const confettiCtx = confettiCanvas.getContext("2d");
+let pieces = [];
+let confettiRunning = false;
+
+function resizeConfetti() {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  confettiCanvas.width = window.innerWidth * dpr;
+  confettiCanvas.height = window.innerHeight * dpr;
+  confettiCanvas.style.width = window.innerWidth + "px";
+  confettiCanvas.style.height = window.innerHeight + "px";
+
+  confettiCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+resizeConfetti();
+window.addEventListener("resize", resizeConfetti);
+
+function launchConfetti() {
+  pieces = Array.from({length: 85}, () => ({
+    x: Math.random() * window.innerWidth,
+    y: -20 - Math.random() * window.innerHeight * .4,
+    size: 3 + Math.random() * 5,
+    speed: 1.4 + Math.random() * 2.5,
+    drift: (Math.random() - .5) * 1.5,
+    angle: Math.random() * 6,
+    spin: (Math.random() - .5) * .12,
+    color: [...flowerColors, "#e0c9a1"][
+      Math.floor(Math.random() * (flowerColors.length + 1))
+    ]
+  }));
+
+  if (!confettiRunning) {
+    confettiRunning = true;
+    requestAnimationFrame(drawConfetti);
+  }
+}
+
+function drawConfetti() {
+  confettiCtx.clearRect(
+    0, 0, window.innerWidth, window.innerHeight
+  );
+
+  pieces.forEach(p => {
+    p.y += p.speed;
+    p.x += p.drift;
+    p.angle += p.spin;
+
+    confettiCtx.save();
+    confettiCtx.translate(p.x, p.y);
+    confettiCtx.rotate(p.angle);
+    confettiCtx.fillStyle = p.color;
+    confettiCtx.globalAlpha = .8;
+    confettiCtx.fillRect(-p.size/2, -p.size/2, p.size, p.size*1.5);
+    confettiCtx.restore();
+  });
+
+  pieces = pieces.filter(
+    p => p.y < window.innerHeight + 30
+  );
+
+  if (pieces.length) {
+    requestAnimationFrame(drawConfetti);
+  } else {
+    confettiRunning = false;
+    confettiCtx.clearRect(
+      0, 0, window.innerWidth, window.innerHeight
+    );
+  }
+}
+</script>
+
+</body>
+</html>
